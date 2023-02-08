@@ -4,11 +4,12 @@ data class Post(
     val date: Int,
     val commentsCount: Int,
     val likesCount: Int,
-    val text: String,
+    val text: String?,
     val canCloseComment: Boolean,
     val canOpenComment: Boolean,
     val canLikes: Boolean,
-    val canPublished: Boolean
+    val canPublished: Boolean,
+    val attachment: Array<Attachment> = emptyArray()
 )
 
 object WallService {
@@ -52,4 +53,4 @@ fun main() {
     WallService.printArray()
     println(WallService.changePost(Post(2, 122, 15, 2, 5, "Dont worry", true, true, false, false)))
     WallService.printArray()
-}
+ }
