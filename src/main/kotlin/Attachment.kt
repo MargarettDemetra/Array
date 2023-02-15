@@ -3,39 +3,39 @@ import java.util.SplittableRandom
 interface Attachment {
     val type: String
 }
-    class Audio(override val type: String,val duration: Int,val lyrics: String): Attachment {
+    class Audio(val type: String,val duration: Int,val lyrics: String) {
     }
 
-    class AudioAttachment(val audio: Audio) {
-        val type = "audio"
+    class AudioAttachment(val audio: Audio): Attachment {
+        override val type = "audio"
     }
 
-    class Note(override val type: String,val title: String) : Attachment {
+    class Note(val type: String,val title: String) {
     }
 
-    class NoteAttachment(val note: Note) {
-        val type = "note"
+    class NoteAttachment(val note: Note): Attachment  {
+        override val type = "note"
     }
 
-    class Video(override val type: String,val platform: String,val duration: Int) : Attachment {
+    class Video(val type: String,val platform: String,val duration: Int) {
     }
 
-    class VideoAttachment(val video: Video) {
-        val type = "video"
+    class VideoAttachment(val video: Video): Attachment  {
+        override val type = "video"
     }
 
-    class Document(override val type: String,val title: String,val wikiUrl: String) : Attachment {
+    class Document( val type: String,val title: String,val wikiUrl: String) {
     }
 
-    class DocumentAttachment(val document: Document) {
-        val type = "document"
+    class DocumentAttachment(val document: Document) : Attachment {
+        override val  type = "document"
     }
 
-    class Photo(override val type: String,val height: Int,val weight: Int) : Attachment {
+    class Photo(val type: String,val height: Int,val weight: Int) {
     }
 
-    class PhotoAttachment(val photo: Photo) {
-        val type = "photo"
+    class PhotoAttachment(val photo: Photo) : Attachment {
+        override  val type = "photo"
     }
 
 
