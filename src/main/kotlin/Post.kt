@@ -12,13 +12,42 @@ data class Post(
     val attachment: Array<Attachment> = emptyArray()
 )
 
+data class Comment(
+    val id: Int,
+    val date: Int,
+    val text: String,
+)
+
+class PostNotFoundException(message: String) : RuntimeException(message)
+
 object WallService {
     private var posts = emptyArray<Post>()
-    private var lastId = 0
+    private var comments = emptyArray<Comment>()
+    private var lastPostId = 0
+    private var lastCommentId = 0
+
+
     fun add(post: Post): Post {
-        posts += post.copy(id = ++lastId)
+        posts += post.copy(id = ++lastPostId)
         return posts.last()
     }
+
+    fun addComment(comment: Comment): Comment {
+        comments += comment.copy(id = ++lastCommentId)
+        return comments.last()
+
+    }
+
+    fun createComment(postId: Int, comment: Comment): String {
+        for ((index, comments) in comments.withIndex()) {
+            if (comment.id == postId) {
+                return comment.text
+            }
+
+        }
+        throw PostNotFoundException("Comment not exist")
+    }
+
 
     fun changePost(newPost: Post): Boolean {
         for ((index, post) in posts.withIndex()) {
@@ -34,23 +63,27 @@ object WallService {
         for (post in posts) {
             println(post)
         }
-
     }
 
-    fun clear(){
+    fun clear() {
         posts = emptyArray()
-        lastId = 0
+        var lastPostId = 0
+    }
+
+
+    fun main() {
+        val post1 = Post(1, 122, 15, 1, 2, "Happy New Year", true, true, false, false)
+        WallService.add(post1)
+        WallService.add(post1)
+        val post2 = Post(2, 122, 15, 2, 4, "Be careful", true, true, false, false)
+        WallService.add(post2)
+        WallService.printArray()
+        println(WallService.changePost(Post(2, 122, 15, 2, 5, "Dont worry", true, true, false, false)))
+        WallService.printArray()
+        val comment1 = Comment(1, 23, "Arrr")
+        WallService.addComment(comment1)
+
+        WallService.createComment(2,comment1)
     }
 }
 
-
-fun main() {
-    val post1 = Post(1, 122, 15, 1, 2, "Happy New Year", true, true, false, false)
-    WallService.add(post1)
-    WallService.add(post1)
-    val post2 = Post(2, 122, 15, 2, 4, "Be careful", true, true, false, false)
-    WallService.add(post2)
-    WallService.printArray()
-    println(WallService.changePost(Post(2, 122, 15, 2, 5, "Dont worry", true, true, false, false)))
-    WallService.printArray()
- }
