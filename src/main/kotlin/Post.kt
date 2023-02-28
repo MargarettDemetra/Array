@@ -38,9 +38,9 @@ object WallService {
 
     }
 
-    fun createComment(postId: Int, comment: Comment): String {
+    fun createComment(CommentId: Int, comment: Comment): String {
         for ((index, comments) in comments.withIndex()) {
-            if (comment.id == postId) {
+            if (comment.id == CommentId) {
                 return comment.text
             }
 
@@ -65,9 +65,20 @@ object WallService {
         }
     }
 
+    fun printComment() {
+        for (comment in comments) {
+            println(comment)
+        }
+    }
+
     fun clear() {
         posts = emptyArray()
         var lastPostId = 0
+    }
+
+    fun clearComment(){
+        comments = emptyArray()
+        var lastCommentId = 0
     }
 
 
@@ -82,8 +93,9 @@ object WallService {
         WallService.printArray()
         val comment1 = Comment(1, 23, "Arrr")
         WallService.addComment(comment1)
-
-        WallService.createComment(2,comment1)
+        WallService.addComment(comment1)
+        WallService.createComment(2, comment1)
+        WallService.printComment()
     }
 }
 

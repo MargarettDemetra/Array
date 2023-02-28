@@ -10,6 +10,11 @@ class WallServiceTest {
         WallService.clear()
     }
 
+    @Before
+    fun clearComment() {
+        WallService.clearComment()
+    }
+
     @Test
     fun add() {
         val post = WallService.add(Post(1, 1, 5, 43, 24, "Hello", true, true, false, false))
@@ -41,4 +46,29 @@ class WallServiceTest {
 
         assertFalse(result)
     }
+
+    @Test
+    fun addComment() {
+        val comment = WallService.addComment(Comment(2, 12, "Hello"))
+        assert(comment.id != 0)
+    }
+
+    @Test
+    fun createCommentHasId() {
+        val serviceTest = WallService
+        serviceTest.createComment(1, Comment(1, 23, "Oops"))
+        val result = TODO
+        assert(result)
+    }
+
+    @Test
+    fun createCommentNoId() {
+        val serviceTest = WallService
+        serviceTest.addComment()
+    }
+
+
 }
+
+
+
