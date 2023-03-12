@@ -39,7 +39,7 @@ object WallService {
     }
 
     fun createComment(CommentId: Int, comment: Comment): String {
-        for ((index, comments) in comments.withIndex()) {
+        for (comments in comments) {
             if (comment.id == CommentId) {
                 return comment.text
             }
@@ -93,8 +93,7 @@ object WallService {
         WallService.printArray()
         val comment1 = Comment(1, 23, "Arrr")
         WallService.addComment(comment1)
-        WallService.addComment(comment1)
-        WallService.createComment(2, comment1)
+        WallService.createComment(1, comment1)
         WallService.printComment()
     }
 }

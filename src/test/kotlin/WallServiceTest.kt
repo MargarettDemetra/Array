@@ -56,18 +56,17 @@ class WallServiceTest {
     @Test
     fun createCommentHasId() {
         val serviceTest = WallService
-        serviceTest.createComment(1, Comment(1, 23, "Oops"))
-        val result = TODO
-        assert(result)
+        serviceTest.addComment(Comment(1, 23, "Oops"))
+        val result = serviceTest.createComment(1, Comment(1, 23, "Oops"))
+        assertEquals("Oops", result)
     }
 
-    @Test
-    fun createCommentNoId() {
+
+    @Test(expected = PostNotFoundException::class)
+    fun shouldThrow(){
         val serviceTest = WallService
-        serviceTest.addComment()
+        serviceTest.createComment(23, Comment(1, 22, "Hi!"))
     }
-
-
 }
 
 
